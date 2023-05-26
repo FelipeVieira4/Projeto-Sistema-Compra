@@ -4,10 +4,7 @@ import java.util.ArrayList;
 
 /**
 *Classe usada para criar produto.
-* 
-*ultima Atualizacao:22/05/2023
 *
-*methodos integração em interfaces
 **/
 
 public class Produto {
@@ -22,7 +19,7 @@ public class Produto {
 		
 	private ArrayList<String> categorias=new ArrayList<String>();
 	
-	/** Construtor da classe produto **/
+	/** Construtor da classe produto simples**/
 	public Produto(String pCodigo,String pName,String pPreco,String[] categorias) {
 		
 		this.setCodigo(pCodigo);
@@ -38,33 +35,30 @@ public class Produto {
 		
 	}
 	
-	/** Construtor da classe produto **/
-	public Produto(String pCodigo,String pName,String pPreco) {
+	/** Construtor completo**/
+	public Produto(String pCodigo,String pName,String pPreco,String[] categorias,String pLocalProduzido,String pContatoDistribuidora,String pDecricao) {
 		
 		this.setCodigo(pCodigo);
 		this.setNome(pName);
 		this.setPreco(pPreco);
-   
+		this.setDecricao(decricao);
+		
+		for(String i:categorias) {
+			this.setCategorias(i);
+		}
+		
+		this.setDistribuidora(contatoDistribuidora);
+		this.setLocalProduzido(localProduzido);
 		
 	}
 	
-	public Produto(String pCodigo,String pName,float pPreco,String descricao) {
-		this.codigo=pCodigo;
-		this.nome=pName;
-		
-    	this.preco=pPreco;
-    	this.decricao=descricao;
-		
-	}
-	
-	/** Retornar o preco do produto**/
 	public float getPreco() {
 		return preco;
 	}
 
 	/** Setar o preco do produto**/
     public boolean setPreco(String pPreco){
-    	if(pPreco.matches("[0-9.]*")){
+    	if(Validacao.FloatTipo(pPreco)){
     		if(Float.parseFloat(pPreco)>0) {
 				this.preco=Float.parseFloat(pPreco);
 				return true;
@@ -84,10 +78,12 @@ public class Produto {
 		}
 	}
 
-	public void setCodigo(String pcodigo) {
-		if(!pcodigo.isBlank() && pcodigo.matches("^[A-Z][0-9]*") && pcodigo.length()<=3){
+	public boolean  setCodigo(String pcodigo) {
+		if(!pcodigo.isBlank() && Validacao.FloatTipo(pcodigo) && pcodigo.length()<=3){
 			this.codigo = pcodigo;
+			return true;
 		}
+		return false;
 	}
 	public String getCodigo() {
 		return this.codigo;
@@ -158,6 +154,10 @@ public class Produto {
 			return true;
 		}
 		return false;
+	}
+	
+	public void clearCategoria() {
+		this.categorias.clear();
 	}
 	
 	public ArrayList<String> getCategoriasToArray() {

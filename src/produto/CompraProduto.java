@@ -1,5 +1,12 @@
 package produto;
 
+/**
+ * 
+ * 
+ * 
+ * 
+ * 
+ * **/
 public class CompraProduto{
 	
 	private int qtda=1;
@@ -11,6 +18,14 @@ public class CompraProduto{
 		this.produto=pProduto;
 		
 		this.setQtda(pQtda);
+		this.setPrecoTotal();
+	}
+	public CompraProduto(Produto pProduto,String pQtda,GarantiaExtendida GarantiaEx) {
+		this.produto=pProduto;
+		
+		this.setQtda(pQtda);
+		this.setGarantia(GarantiaEx);
+		this.setPrecoTotal();
 	}
 	
 	public int getQtda() {
@@ -18,11 +33,10 @@ public class CompraProduto{
 	}
 
 	public boolean setQtda(String pqtda) {
-		if(pqtda.matches("[0-9]*")){
+		if(Validacao.IntTipo(pqtda)){
 	          this.qtda=Integer.parseInt(pqtda);
 	          return true;
 	        }
-	        System.out.println("Renda ínvalido!!");
 	        return false;
 	}
 	
@@ -49,7 +63,8 @@ public class CompraProduto{
 	}
 
 	public void setPrecoTotal() {
-		this.precoTotal = (this.produto.getPreco()*this.qtda)+this.garantia.getPrecoGarantia();
+		this.precoTotal = (this.produto.getPreco()*this.qtda);
+		if(this.garantia!=null)this.precoTotal+=this.garantia.getPrecoGarantia();
 	}
 
 	public Produto getProduto() {
