@@ -19,12 +19,12 @@ public class Produto {
 		
 	private ArrayList<String> categorias=new ArrayList<String>();
 	
-	/** Construtor da classe produto simples**/
+	/** Construtor simples**/
 	public Produto(String pCodigo,String pName,String pPreco,String[] categorias) {
 		
 		this.setCodigo(pCodigo);
 		this.setNome(pName);
-		
+
 		
 		for(String i:categorias) {
 			this.setCategorias(i);
