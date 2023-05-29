@@ -13,7 +13,22 @@ public class CompraProduto{
 	private float precoTotal=0.0f;
 	private GarantiaExtendida garantia = null;
 	private Produto produto;
+	private String codigo;
 	
+	
+	
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public boolean setCodigo(String pCodigo) {
+		if(Validacao.Codigo(pCodigo)) {
+			this.codigo = pCodigo;
+			return true;
+		}
+		return false;
+	}
+
 	/**Metodo construtor sem Garantia**/
 	public CompraProduto(Produto pProduto,int pQtda) {
 		this.produto=pProduto;
