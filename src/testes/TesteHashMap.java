@@ -3,7 +3,6 @@ package testes;
 import java.util.HashMap;
 
 import produto.CompraProduto;
-import produto.GarantiaExtendida;
 import produto.Produto;
 
 /**

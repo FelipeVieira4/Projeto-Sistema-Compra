@@ -2,7 +2,7 @@ package produto;
 
 /**
  *  
- * Usado para instânciar um produtos na compra.
+ * Usado para instanciar um produto,compra,quantidades do produto e a Garantia do produto(s) comprado.
  * 
  * 
  * 
@@ -14,12 +14,15 @@ public class CompraProduto{
 	private GarantiaExtendida garantia = null;
 	private Produto produto;
 	
+	/**Metodo construtor sem Garantia**/
 	public CompraProduto(Produto pProduto,int pQtda) {
 		this.produto=pProduto;
 		
 		this.setQtda(pQtda);
 		this.setPrecoTotal();
 	}
+	
+	/**Metodo construtor com Garantia**/
 	public CompraProduto(Produto pProduto,int pQtda,GarantiaExtendida GarantiaEx) {
 		this.produto=pProduto;
 		
@@ -28,10 +31,12 @@ public class CompraProduto{
 		this.setPrecoTotal();
 	}
 	
+	/**Retorna a valor de quantidades**/
 	public int getQtda() {
 		return qtda;
 	}
 
+	/**Setar a quantidades**/
 	public boolean setQtda(int pqtda) {
 		if(pqtda>0){
 	          this.qtda=pqtda;
@@ -40,27 +45,33 @@ public class CompraProduto{
 	        return false;
 	}
 	
+	/**Retornar a Garantia Extendida**/
 	public GarantiaExtendida getGarantia() {
 		return garantia;
 	}
 
+	/**Setar a Garantia Extendida**/
 	public void setGarantia(GarantiaExtendida pgarantia) {
 		this.garantia = pgarantia;
 	}
 	
+	/**Setar o preco da comprar**/
 	public float getPrecoTotal() {
 		return precoTotal;
 	}
 
+	/**Calcular o preco da comprar**/
 	public void setPrecoTotal() {
 		this.precoTotal = (this.produto.getPreco()*this.qtda);
 		if(this.garantia!=null)this.precoTotal+=this.garantia.getPrecoGarantia();
 	}
 
+	/**Retornar o produto da compra**/
 	public Produto getProduto() {
 		return produto;
 	}
 
+	/**Setar o produto da compra**/
 	public void setProduto(Produto p) {
 		this.produto = p;
 	}
