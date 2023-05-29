@@ -1,9 +1,2 @@
-/**
- * 
- */
-/**
- * @author felipe
- *
- */
-module sistemaCompra {
+module ProjetoSistemaCompra {
 }
