@@ -66,7 +66,7 @@ public class Produto {
     	return false;
     }
 	
-   	/**Retornar nome do produto**/
+    /**Retornar nome do produto**/
 	public String getNome() {
 		return nome;
 	}
