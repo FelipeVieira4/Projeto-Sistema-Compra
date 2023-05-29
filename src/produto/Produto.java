@@ -51,11 +51,12 @@ public class Produto {
 		
 	}
 	
+	/**Retornar preço do produto**/
 	public float getPreco() {
 		return preco;
 	}
 
-	/** Setar o preco do produto**/
+	/**Setar o preco do produto**/
     public boolean setPreco(float pPreco){
     	if(pPreco>0){
 				this.preco=pPreco;
@@ -65,15 +66,19 @@ public class Produto {
     	return false;
       }
 	
+    /**Retornar nome do produto**/
 	public String getNome() {
 		return nome;
 	}
+	
+	/**Setar o nome do produto**/
 	public void setNome(String pnome) {
 		if(!pnome.isBlank()) {
 			this.nome = pnome;
 		}
 	}
 
+	/**Retornar o codigo do produto**/
 	public String getCodigo() {
 		return this.codigo;
 	}
@@ -87,10 +92,12 @@ public class Produto {
 		return false;
 	}
 	
+	/**Retornar a Distribuidora do produto**/
 	public String getDistribuidora() {
 		return distribuidora;
 	}
 
+	/**Setar a Distribuidora do produto**/
 	public boolean setDistribuidora(String pDistribuidora) {
 		if(!pDistribuidora.isBlank()) {
 			this.distribuidora = pDistribuidora;
@@ -99,10 +106,12 @@ public class Produto {
 		return false;
 	}
 
+	/**Retornar o lugar onde o produto foi produzido**/
 	public String getLocalProduzido() {
 		return localProduzido;
 	}
 
+	/**Setar o lugar onde o produto foi produzido**/
 	public boolean setLocalProduzido(String pLocalProduzido) {
 		if(!pLocalProduzido.isBlank()) {
 			this.localProduzido = pLocalProduzido;
@@ -112,11 +121,12 @@ public class Produto {
 	}
 
 	
-	
+	/**Retornar o contato da Distribuidora do produto**/
 	public String getContatoDistribuidora() {
 		return contatoDistribuidora;
 	}
 
+	/**Setar o contato da Distribuidora do produto**/
 	public boolean setContatoDistribuidora(String pContatoDistribuidora) {
 		if(!pContatoDistribuidora.isBlank()) {
 			this.contatoDistribuidora = pContatoDistribuidora;
@@ -126,11 +136,12 @@ public class Produto {
 	}
 
 
-	
+	/**Retornar a Descricao do produto**/
 	public String getDecricao() {
 		return decricao;
 	}
 
+	/**Setar a Descricao do produto**/
 	public boolean setDecricao(String pDecricao) {
 		if(!pDecricao.isBlank()) {
 			this.decricao = pDecricao;
@@ -140,12 +151,12 @@ public class Produto {
 	}
 
 	
-	
+	/**Retornar uma categoria especifica do produto**/
 	public String getCategorias(int index) {
 		return categorias.get(index);
 	}
 	
-	
+	/**Remover uma categoria especifica do produto**/
 	public boolean removeCategoria(int index) {
 		if(categorias.size() > index) {
 			categorias.remove(index);
@@ -154,20 +165,24 @@ public class Produto {
 		return false;
 	}
 	
-	/*Limpar a array de Categorias do produto*/
+	/**Limpar todas as Categorias do produto**/
 	public void clearCategoria() {
 		this.categorias.clear();
 	}
 	
+	/**Retornar uma ArrayList da Categorias ao produto**/
 	public ArrayList<String> getCategoriasToArray() {
 		return categorias;
 	}
 
+	/**Adicionar uma nova Categoria ao produto**/
 	public void setCategorias(String pCategorias) {
 		if(!pCategorias.isBlank()) {
 			this.categorias.add(pCategorias);
 		}
 	}
+	
+	/**Adicionar uma ArrayList da Categorias ao produto**/
 	public void setCategorias(String[] pCategorias) {
 		for(String i : pCategorias) {
 			this.categorias.add(i);
