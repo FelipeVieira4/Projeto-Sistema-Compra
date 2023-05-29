@@ -5,12 +5,14 @@ import java.util.ArrayList;
 /**
 *Usado para criar produtos no banco dados.
 *
+*
+*@author Felipe V.
 **/
 
 public class Produto {
 	
 	private float preco=0.0f;
-	private String codigo;
+	private String codigo = "";
 	private String nome;
 	private String decricao;
 	private String distribuidora;
@@ -87,7 +89,7 @@ public class Produto {
 
 	/**Setar o codigo de um produto tem regex digitos**/
 	public boolean  setCodigo(String pcodigo) {
-		if(!pcodigo.isBlank() && Validacao.IntTipo(pcodigo) && pcodigo.length()<=3){
+		if(Validacao.Codigo(pcodigo)){
 			this.codigo = pcodigo;
 			return true;
 		}

@@ -18,7 +18,7 @@ public class TesteHashMap {
 		System.out.println("-TEST- (HASHMAP)");
 		//Lista de produto (banco dados)
 		HashMap<String, Produto> listaProduto = new HashMap<String, Produto>();
-		listaProduto.put("F35",new Produto("F22","Macarrao",35.3f,new String[] {"TEST1","Test2"}));
+		listaProduto.put("F35",new Produto("F35","Macarrao",35.3f,new String[] {"TEST1","Test2"}));
 		listaProduto.put("F40",new Produto("F40","Test",25.5f,new String[] {"TEST1","Test2"}));
 		listaProduto.get("F40").setCategorias(new String[]{"Automovel","CARRO"});
 		listaProduto.get("F40").removeCategoria(1);
@@ -28,12 +28,13 @@ public class TesteHashMap {
 
             //Capturamos o valor a partir da chave
             String nome = listaProduto.get(chaves).getNome();
-            String categorias="";
+            String categorias = "";
+            String codigo = listaProduto.get(chaves).getCodigo();
             
             for(String i:listaProduto.get(chaves).getCategoriasToArray()) {
             	categorias+=i+",";
             }
-            System.out.println(chaves + " = " + nome + "	:["+categorias+"]");
+            System.out.println(chaves + " = " + nome + "	:["+categorias+"]" + "| CODIGO:"+codigo);
 		}
 		
 		//Lista do usuário (compra)

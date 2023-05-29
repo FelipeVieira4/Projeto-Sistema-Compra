@@ -5,10 +5,11 @@ package produto;
  * Usado para instanciar um produto,compra,quantidades do produto e a Garantia do produto(s) comprado.
  * 
  * 
- * 
+ * @author Felipe V.
  * **/
 public class CompraProduto{
 	
+	String codigo = "";
 	private int qtda=0;
 	private float precoTotal=0.0f;
 	private GarantiaExtendida garantia = null;

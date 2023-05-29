@@ -4,6 +4,7 @@ package produto;
  * 
  * Fornece uma Garantia Extendida para produto(s).
  * 
+ * @author Felipe V.
  * **/
 
 public class GarantiaExtendida {
