@@ -9,18 +9,18 @@ package produto;
  * **/
 public class CompraProduto{
 	
-	private int qtda=1;
+	private int qtda=0;
 	private float precoTotal=0.0f;
 	private GarantiaExtendida garantia = null;
 	private Produto produto;
 	
-	public CompraProduto(Produto pProduto,String pQtda) {
+	public CompraProduto(Produto pProduto,int pQtda) {
 		this.produto=pProduto;
 		
 		this.setQtda(pQtda);
 		this.setPrecoTotal();
 	}
-	public CompraProduto(Produto pProduto,String pQtda,GarantiaExtendida GarantiaEx) {
+	public CompraProduto(Produto pProduto,int pQtda,GarantiaExtendida GarantiaEx) {
 		this.produto=pProduto;
 		
 		this.setQtda(pQtda);
@@ -32,23 +32,14 @@ public class CompraProduto{
 		return qtda;
 	}
 
-	public boolean setQtda(String pqtda) {
-		if(Validacao.IntTipo(pqtda)){
-	          this.qtda=Integer.parseInt(pqtda);
+	public boolean setQtda(int pqtda) {
+		if(pqtda>0){
+	          this.qtda=pqtda;
 	          return true;
 	        }
 	        return false;
 	}
 	
-	
-	
-	public String getGarantiaInfo() {
-		return "TIPO DA GARANTIA:"+garantia.getTipoGarantia()
-		+"\nDECRIÇÃO:"+garantia.getDescricao()
-		+"\nPREÇO Adicional:"+garantia.getPrecoGarantia()
-		+"\nTEMPO:"+garantia.getTempodeGarantia();
-	}	
-
 	public GarantiaExtendida getGarantia() {
 		return garantia;
 	}

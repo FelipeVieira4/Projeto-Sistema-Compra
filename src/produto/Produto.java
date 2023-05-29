@@ -20,7 +20,7 @@ public class Produto {
 	private ArrayList<String> categorias=new ArrayList<String>();
 	
 	/** Construtor simples**/
-	public Produto(String pCodigo,String pName,String pPreco,String[] categorias) {
+	public Produto(String pCodigo,String pName,float pPreco,String[] categorias) {
 		
 		this.setCodigo(pCodigo);
 		this.setNome(pName);
@@ -31,12 +31,11 @@ public class Produto {
 		}
 		
 		this.setPreco(pPreco);
-   
-		
+   		
 	}
 	
-	/** Construtor completo**/
-	public Produto(String pCodigo,String pName,String pPreco,String[] categorias,String pLocalProduzido,String pContatoDistribuidora,String pDecricao) {
+	/**Construtor completo**/
+	public Produto(String pCodigo,String pName,float pPreco,String[] categorias,String pLocalProduzido,String pContatoDistribuidora,String pDecricao) {
 		
 		this.setCodigo(pCodigo);
 		this.setNome(pName);
@@ -57,9 +56,9 @@ public class Produto {
 	}
 
 	/** Setar o preco do produto**/
-    public boolean setPreco(String pPreco){
-    	if(Validacao.FloatTipo(pPreco) && Float.parseFloat(pPreco)>0){
-				this.preco=Float.parseFloat(pPreco);
+    public boolean setPreco(float pPreco){
+    	if(pPreco>0){
+				this.preco=pPreco;
 				return true;    		
     	}
     	
