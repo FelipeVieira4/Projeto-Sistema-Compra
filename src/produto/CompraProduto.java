@@ -1,9 +1,8 @@
 package produto;
 
 /**
- * 
- * 
- * 
+ *  
+ * Usado para criar produtos.
  * 
  * 
  * **/

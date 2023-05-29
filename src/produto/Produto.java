@@ -3,7 +3,7 @@ package produto;
 import java.util.ArrayList;
 
 /**
-*Classe usada para criar produto.
+*Usado para criar produtos no banco dados.
 *
 **/
 
@@ -58,12 +58,9 @@ public class Produto {
 
 	/** Setar o preco do produto**/
     public boolean setPreco(String pPreco){
-    	if(Validacao.FloatTipo(pPreco)){
-    		if(Float.parseFloat(pPreco)>0) {
+    	if(Validacao.FloatTipo(pPreco) && Float.parseFloat(pPreco)>0){
 				this.preco=Float.parseFloat(pPreco);
-				return true;
-    		}
-    		
+				return true;    		
     	}
     	
     	return false;
@@ -78,17 +75,19 @@ public class Produto {
 		}
 	}
 
+	public String getCodigo() {
+		return this.codigo;
+	}
+
+	/**Setar o codigo de um produto tem regex digitos**/
 	public boolean  setCodigo(String pcodigo) {
-		if(!pcodigo.isBlank() && Validacao.FloatTipo(pcodigo) && pcodigo.length()<=3){
+		if(!pcodigo.isBlank() && Validacao.IntTipo(pcodigo) && pcodigo.length()<=3){
 			this.codigo = pcodigo;
 			return true;
 		}
 		return false;
 	}
-	public String getCodigo() {
-		return this.codigo;
-	}
-
+	
 	public String getDistribuidora() {
 		return distribuidora;
 	}
@@ -147,8 +146,8 @@ public class Produto {
 		return categorias.get(index);
 	}
 	
+	
 	public boolean removeCategoria(int index) {
-		System.out.println(categorias.size());
 		if(categorias.size() > index) {
 			categorias.remove(index);
 			return true;
@@ -156,6 +155,7 @@ public class Produto {
 		return false;
 	}
 	
+	/*Limpar a array de Categorias do produto*/
 	public void clearCategoria() {
 		this.categorias.clear();
 	}

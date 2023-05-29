@@ -25,7 +25,7 @@ public class TesteHashMap {
 		System.out.println(listaProduto.get("F35").getLocalProduzido());
 		
 		HashMap<String, CompraProduto> carrinho = new HashMap<String, CompraProduto>();
-		carrinho.put("F23", new CompraProduto(listaProduto.get("F40"),"8"));
+		carrinho.put("F23", new CompraProduto(listaProduto.get("F40"),"5"));
 		
 		//carrinho.get("F23").setGarantia(new GarantiaExtendida("básica", 6, 750.0f, "Nenhuma"));
 		//carrinho.get("F23").setPrecoTotal();

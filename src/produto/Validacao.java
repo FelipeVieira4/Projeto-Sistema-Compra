@@ -1,12 +1,12 @@
 package produto;
 /**
- * Fazer Validação das variáveis
+ * Fazer Validacao das variaveis
  * 
  * 
  * **/
 public class Validacao {
 
-	/**Validar variáveis do tipo float**/
+	/**tipo float**/
 	public static boolean FloatTipo(String floatString){
 		try{
 			Float.parseFloat(floatString);
@@ -16,7 +16,7 @@ public class Validacao {
 		}
 	}
 	
-	/**Validar variáveis do tipo int**/
+	/**tipo int**/
 	public static boolean IntTipo(String intString){
 		try{
 			Integer.parseInt(intString);

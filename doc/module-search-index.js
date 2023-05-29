@@ -1,1 +1,1 @@
-moduleSearchIndex = [{"l":"sistemaCompra"}];updateSearchResults();
+moduleSearchIndex = [{"l":"ProjetoSistemaCompra"}];updateSearchResults();
