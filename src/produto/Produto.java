@@ -15,9 +15,9 @@ public class Produto {
 	private String codigo = "";
 	private String nome;
 	private String decricao;
-	private String distribuidora;
-	private String contatoDistribuidora;
-	private String localProduzido;
+	private String distribuidora;			//Nome da Distribuidora
+	private String contatoDistribuidora;	//Contato com a Distribuidora(forma: email)
+	private String localProduzido;			//Aonde o produto foi fabricado
 		
 	private ArrayList<String> categorias=new ArrayList<String>();
 	

@@ -9,7 +9,6 @@ package produto;
  * **/
 public class CompraProduto{
 	
-	String codigo = "";
 	private int qtda=0;
 	private float precoTotal=0.0f;
 	private GarantiaExtendida garantia = null;
