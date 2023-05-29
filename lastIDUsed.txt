@@ -1,0 +1,6 @@
+A       -> Caracter do id (Char)
+55      -> Número do id   (Byte)
+
+if(Número do id >= 100 e Caracter do id != 'Z')
+    Caracter do id++    -> Ir para o proximo caracter
+    Número do id = 0    -> Reseta Número do id
