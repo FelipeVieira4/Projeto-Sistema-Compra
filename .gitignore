@@ -1,6 +1,6 @@
 \bin
 \doc
 \src\module-info.java
+\.settings
 .project
 .classpath
-.settings/org.eclipse.buildship.core.prefs
