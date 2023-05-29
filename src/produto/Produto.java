@@ -59,8 +59,8 @@ public class Produto {
 	/**Setar o preco do produto**/
     public boolean setPreco(float pPreco){
     	if(pPreco>0){
-				this.preco=pPreco;
-				return true;    		
+			this.preco=pPreco;
+			return true;    		
     	}
     	
     	return false;
