@@ -10,8 +10,8 @@ package produto;
 public class CompraProduto{
 	
 	private int qtda=0;
-	private float precoTotal=0.0f;
-	private GarantiaExtendida garantia = null;
+	private float precoCompra=0.0f;					//Preço da compra do produto
+	private GarantiaExtendida garantia = null;		
 	private Produto produto;
 	private String codigo;
 	
@@ -77,13 +77,13 @@ public class CompraProduto{
 	
 	/**Setar o preco da comprar**/
 	public float getPrecoTotal() {
-		return precoTotal;
+		return precoCompra;
 	}
 
 	/**Calcular o preco da comprar**/
 	public void setPrecoTotal() {
-		this.precoTotal = (this.produto.getPreco()*this.qtda);
-		if(this.garantia!=null)this.precoTotal+=this.garantia.getPrecoGarantia();
+		this.precoCompra = (this.produto.getPreco()*this.qtda);
+		if(this.garantia!=null)this.precoCompra+=this.garantia.getPrecoGarantia();
 	}
 
 	/**Retornar o produto da compra**/
