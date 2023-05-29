@@ -16,11 +16,12 @@ public class CompraProduto{
 	private String codigo;
 	
 	
-	
+	/**Retorna codigo da compra**/
 	public String getCodigo() {
 		return codigo;
 	}
 
+	/**Seta codigo da compra**/
 	public boolean setCodigo(String pCodigo) {
 		if(Validacao.Codigo(pCodigo)) {
 			this.codigo = pCodigo;
