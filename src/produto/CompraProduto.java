@@ -2,7 +2,8 @@ package produto;
 
 /**
  *  
- * Usado para criar produtos.
+ * Usado para instânciar um produtos na compra.
+ * 
  * 
  * 
  * **/
@@ -54,7 +55,6 @@ public class CompraProduto{
 
 	public void setGarantia(GarantiaExtendida pgarantia) {
 		this.garantia = pgarantia;
-		
 	}
 	
 	public float getPrecoTotal() {
