@@ -51,8 +51,12 @@ public class CompraProduto{
 	}
 
 	/**Setar a Garantia Extendida**/
-	public void setGarantia(GarantiaExtendida pgarantia) {
-		this.garantia = pgarantia;
+	public boolean setGarantia(GarantiaExtendida pgarantia) {
+		if(pgarantia!=null) {
+			this.garantia = pgarantia;
+			return true;
+		}
+		return false;
 	}
 	
 	/**Setar o preco da comprar**/
@@ -72,8 +76,12 @@ public class CompraProduto{
 	}
 
 	/**Setar o produto da compra**/
-	public void setProduto(Produto p) {
-		this.produto = p;
+	public boolean setProduto(Produto p) {
+		if(p!=null) {
+			this.produto = p;
+			return true;
+		}
+		return false;
 	}
 	
 	

@@ -72,10 +72,12 @@ public class Produto {
 	}
 	
 	/**Setar o nome do produto**/
-	public void setNome(String pnome) {
+	public boolean setNome(String pnome) {
 		if(!pnome.isBlank()) {
 			this.nome = pnome;
+			return true;
 		}
+		return false;
 	}
 
 	/**Retornar o codigo do produto**/
@@ -184,6 +186,7 @@ public class Produto {
 	
 	/**Adicionar uma ArrayList da Categorias ao produto**/
 	public void setCategorias(String[] pCategorias) {
+			
 		for(String i : pCategorias) {
 			this.categorias.add(i);
 		}
