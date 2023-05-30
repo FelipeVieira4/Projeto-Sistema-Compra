@@ -21,7 +21,7 @@ public class Produto {
 		
 	private ArrayList<String> categorias=new ArrayList<String>();
 	
-	/** Construtor simples**/
+	/**Construtor simples**/
 	public Produto(String pCodigo,String pName,float pPreco,String[] categorias) {
 		
 		this.setCodigo(pCodigo);

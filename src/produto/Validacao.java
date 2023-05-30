@@ -28,6 +28,6 @@ public class Validacao {
 	
 	/**regex Codigo**/
 	public static boolean Codigo(String codigo) {
-		return codigo.matches("^[A-Z][0-9]*") && codigo.length()<=3?true:false;
+		return codigo.matches("^[A-Z][0-9]*") && codigo.length()>=3?true:false;
 	}
 }
