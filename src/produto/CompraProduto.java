@@ -16,19 +16,7 @@ public class CompraProduto{
 	private String codigo;
 	
 	
-	/**Retorna codigo da compra**/
-	public String getCodigo() {
-		return codigo;
-	}
 
-	/**Seta codigo da compra**/
-	public boolean setCodigo(String pCodigo) {
-		if(Validacao.Codigo(pCodigo)) {
-			this.codigo = pCodigo;
-			return true;
-		}
-		return false;
-	}
 
 	/**Metodo construtor sem Garantia**/
 	public CompraProduto(Produto pProduto,int pQtda) {
@@ -45,6 +33,21 @@ public class CompraProduto{
 		this.setQtda(pQtda);
 		this.setGarantia(GarantiaEx);
 		this.setPrecoTotal();
+	}
+
+	
+	/**Retorna codigo da compra**/
+	public String getCodigo() {
+		return codigo;
+	}
+
+	/**Seta codigo da compra**/
+	public boolean setCodigo(String pCodigo) {
+		if(Validacao.Codigo(pCodigo)) {
+			this.codigo = pCodigo;
+			return true;
+		}
+		return false;
 	}
 	
 	/**Retorna a valor de quantidades**/
