@@ -15,6 +15,8 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PrincipalScreen extends JFrame {
 
@@ -129,6 +131,10 @@ public class PrincipalScreen extends JFrame {
 		cadastroPane.add(lblDescricao);
 		
 		JButton runButton = new JButton("RUN");
+		runButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		runButton.setBounds(512, 312, 89, 23);
 		cadastroPane.add(runButton);
 		
