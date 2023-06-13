@@ -7,7 +7,9 @@ A       -> Caracter do id (Char)
 if(Caracter do id == 'Z' Número do id >= 999)
     escrever "o banco dados está cheio"
     retorna false
-else if(Número do id >= 999 e Caracter do id != 'Z')
+else
     Caracter do id++    -> Ir para o proximo caracter
     Número do id = 0    -> Reseta Número do id
     retorna true
+    
+JFileChooser

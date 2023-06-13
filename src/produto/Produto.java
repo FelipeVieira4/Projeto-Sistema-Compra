@@ -2,6 +2,8 @@ package produto;
 
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 /**
 *Usado para criar produtos no banco dados.
 *
@@ -18,9 +20,15 @@ public class Produto {
 	private String distribuidora;			//Nome da Distribuidora
 	private String contatoDistribuidora;	//Contato com a Distribuidora(forma: email)
 	private String localProduzido;			//Aonde o produto foi fabricado
-		
+	
+	private ImageIcon iconProduto;
+	
 	private ArrayList<String> categorias=new ArrayList<String>();
 	
+	
+	public Produto() {
+		
+	}
 	/**Construtor simples**/
 	public Produto(String pCodigo,String pName,float pPreco,String[] categorias) {
 		
@@ -192,5 +200,13 @@ public class Produto {
 		for(String i : pCategorias) {
 			this.categorias.add(i);
 		}
-	}	
+	}
+	public ImageIcon getIconProduto() {
+		return iconProduto;
+	}
+	public void setIcon(ImageIcon iconProduto) {
+		this.iconProduto = iconProduto;
+	}
+		
+	
 }
