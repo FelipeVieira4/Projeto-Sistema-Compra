@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import produto.Produto;
+import produto.Validacao;
 
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
@@ -16,16 +17,13 @@ import java.awt.Image;
 
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 public class PrincipalScreen extends JFrame {
@@ -192,9 +190,10 @@ public class PrincipalScreen extends JFrame {
 					p.setPreco(Float.parseFloat(precoTextField.getText()));
 				}
 				
-				p.setNome(nomeTextField.getText());
-				p.setCodigo(codigoTextField.getText());
-				
+				if(Validacao.Codigo(codigoTextField.getText()) && !nomeTextField.getText().isBlank()) {
+					p.setNome(nomeTextField.getText());
+					p.setCodigo(codigoTextField.getText());
+				}
 				
 				JFileChooser fileChooser = new JFileChooser();
 				fileChooser.showOpenDialog(getParent());
