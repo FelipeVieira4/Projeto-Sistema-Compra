@@ -2,6 +2,7 @@ package view;
 
 import java.awt.EventQueue;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,6 +13,8 @@ import produto.Validacao;
 
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.Image;
 
@@ -35,17 +38,22 @@ public class PrincipalScreen extends JFrame {
 	private JPanel contentPane;
 
 	
-	private ArrayList<Produto> lista_produtos = new ArrayList<Produto>();
+	private HashMap<String, Produto> lista_produtos = new HashMap<String, Produto>();
 	
 	//Componentes Interface
-	private JTextField precoTextField;
-	private JTextField nomeTextField;
-	private JTextField codigoTextField;
+	private JTextField precoTF_cadastro;
+	private JTextField nomeTX_cadastro;
+	private JTextField codigoTF_cadastro;
 	private JTextField localTextField;
 	private JTextField contatoTextField;
-	private JTextField categoriasTextField;
-	private JTextField codigoTextField_1;
+	private JTextField categoriasTX_cadastro;
 	private JTable table;
+	private JTextField codigoTF_buscar;
+	private JTextField contatoTF_buscar;
+	private JTextField localTF_buscar;
+	private JTextField categoriasTF_buscar;
+	private JTextField precoTF_buscar;
+	private JTextField nomeTF_buscar;
 	
 	/**
 	 * Launch the application.
@@ -67,6 +75,7 @@ public class PrincipalScreen extends JFrame {
 	 * Create the frame.
 	 */
 	public PrincipalScreen() {
+		setTitle("Trabalho");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 642, 424);
 		contentPane = new JPanel();
@@ -79,38 +88,6 @@ public class PrincipalScreen extends JFrame {
 		tabbedPane.setBounds(10, 11, 606, 363);
 		contentPane.add(tabbedPane);
 		
-		JPanel buscaPanel = new JPanel();
-		tabbedPane.addTab("Buscar Produto", null, buscaPanel, null);
-		buscaPanel.setLayout(null);
-		
-		JLabel codigoPanel = new JLabel("Escolha Codigo");
-		codigoPanel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		codigoPanel.setBounds(10, 11, 96, 19);
-		buscaPanel.add(codigoPanel);
-		
-		codigoTextField_1 = new JTextField();
-		codigoTextField_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		codigoTextField_1.setBounds(116, 12, 86, 20);
-		buscaPanel.add(codigoTextField_1);
-		codigoTextField_1.setColumns(10);
-		
-		
-		JLabel lblNewLabel = new JLabel();
-		lblNewLabel.setBounds(285, 118, 251, 178);
-		buscaPanel.add(lblNewLabel);
-		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null},
-			},
-			new String[] {
-				"New column", "New column", "New column"
-			}
-		));
-		table.setBounds(0, 145, 601, 190);
-		buscaPanel.add(table);
-		
 		
 		
 		JPanel cadastroPanel = new JPanel();
@@ -122,30 +99,30 @@ public class PrincipalScreen extends JFrame {
 		lblPreco.setBounds(0, 226, 57, 18);
 		cadastroPanel.add(lblPreco);
 		
-		precoTextField = new JTextField();
-		precoTextField.setColumns(10);
-		precoTextField.setBounds(47, 226, 86, 20);
-		cadastroPanel.add(precoTextField);
+		precoTF_cadastro = new JTextField();
+		precoTF_cadastro.setColumns(10);
+		precoTF_cadastro.setBounds(47, 226, 86, 20);
+		cadastroPanel.add(precoTF_cadastro);
 		
 		JLabel lbNome = new JLabel("nome");
 		lbNome.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lbNome.setBounds(0, 194, 57, 18);
 		cadastroPanel.add(lbNome);
 		
-		nomeTextField = new JTextField();
-		nomeTextField.setColumns(10);
-		nomeTextField.setBounds(47, 194, 196, 20);
-		cadastroPanel.add(nomeTextField);
+		nomeTX_cadastro = new JTextField();
+		nomeTX_cadastro.setColumns(10);
+		nomeTX_cadastro.setBounds(47, 194, 196, 20);
+		cadastroPanel.add(nomeTX_cadastro);
 		
 		JLabel lbCodigo = new JLabel("codigo");
 		lbCodigo.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lbCodigo.setBounds(0, 162, 57, 18);
 		cadastroPanel.add(lbCodigo);
 		
-		codigoTextField = new JTextField();
-		codigoTextField.setColumns(10);
-		codigoTextField.setBounds(47, 162, 86, 20);
-		cadastroPanel.add(codigoTextField);
+		codigoTF_cadastro = new JTextField();
+		codigoTF_cadastro.setColumns(10);
+		codigoTF_cadastro.setBounds(47, 162, 86, 20);
+		cadastroPanel.add(codigoTF_cadastro);
 		
 		JLabel lbLocalProduzido = new JLabel("Local Produzido");
 		lbLocalProduzido.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -159,12 +136,12 @@ public class PrincipalScreen extends JFrame {
 		
 		JLabel lblContato = new JLabel("Contato Distribuidora");
 		lblContato.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblContato.setBounds(0, 317, 134, 18);
+		lblContato.setBounds(0, 317, 149, 18);
 		cadastroPanel.add(lblContato);
 		
 		contatoTextField = new JTextField();
 		contatoTextField.setColumns(10);
-		contatoTextField.setBounds(144, 315, 187, 20);
+		contatoTextField.setBounds(144, 318, 187, 20);
 		cadastroPanel.add(contatoTextField);
 		
 		JTextPane descricaoTextPane = new JTextPane();
@@ -177,23 +154,24 @@ public class PrincipalScreen extends JFrame {
 		cadastroPanel.add(lblDescricao);
 		
 		JLabel lblfoto = new JLabel("");
- 		lblfoto.setBounds(0, 11, 133, 108);
+ 		lblfoto.setBounds(0, 11, 150, 120);
  		cadastroPanel.add(lblfoto);
  		
 		JButton runButton = new JButton("RUN");
 		runButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				boolean validacaoProduto=true;
 				Produto p = new Produto();
-				if(precoTextField.getText().matches("[0-9.]*") && !precoTextField.getText().isBlank()) {
-					System.out.println("Sucesso");
-					p.setPreco(Float.parseFloat(precoTextField.getText()));
-				}
 				
-				if(Validacao.Codigo(codigoTextField.getText()) && !nomeTextField.getText().isBlank()) {
-					p.setNome(nomeTextField.getText());
-					p.setCodigo(codigoTextField.getText());
-				}
+				if((precoTF_cadastro.getText().matches("[0-9.]*") && !precoTF_cadastro.getText().isBlank())
+					&& (Validacao.Codigo(codigoTF_cadastro.getText()) && !nomeTX_cadastro.getText().isBlank())) {
+					System.out.println("Sucesso");
+					p.setPreco(Float.parseFloat(precoTF_cadastro.getText()));
+					p.setNome(nomeTX_cadastro.getText());
+					p.setCodigo(codigoTF_cadastro.getText());
+					
+				} else validacaoProduto=false;
 				
 				JFileChooser fileChooser = new JFileChooser();
 				fileChooser.showOpenDialog(getParent());
@@ -206,26 +184,147 @@ public class PrincipalScreen extends JFrame {
 				
 				lblfoto.setIcon(p.getIconProduto());
 				
-				lista_produtos.add(p);
 				
-				DefaultTableModel modelo =(DefaultTableModel) table.getModel();
-				modelo.addRow(new Object[] {p.getCodigo(),p.getNome(),p.getPreco()});
-				table.setModel(modelo);
+				
+				if(lista_produtos.get(p.getCodigo())==null && validacaoProduto) {//verificar se não existe nenhum produto com esse código
+				
+					lista_produtos.put(p.getCodigo(),p);				
+										
+					DefaultTableModel modelo =(DefaultTableModel) table.getModel();
+					modelo.addRow(new Object[] {p.getCodigo(),p.getNome(),p.getPreco()});
+					table.setModel(modelo);
+					
+				}
+			
 			}
 		});
 		runButton.setBounds(520, 303, 71, 32);
 		cadastroPanel.add(runButton);
 		
- 		categoriasTextField = new JTextField();
+ 		categoriasTX_cadastro = new JTextField();
  		lblDescricao.setBounds(279, 106, 120, 25);
- 		categoriasTextField.setBounds(144, 257, 447, 20);
- 		cadastroPanel.add(categoriasTextField);
- 		categoriasTextField.setColumns(10);
+ 		categoriasTX_cadastro.setBounds(144, 257, 447, 20);
+ 		cadastroPanel.add(categoriasTX_cadastro);
+ 		categoriasTX_cadastro.setColumns(10);
  		
  		JLabel lblCategorias = new JLabel("Categorias");
  		lblCategorias.setFont(new Font("Tahoma", Font.PLAIN, 15));
  		lblCategorias.setBounds(0, 261, 120, 18);
  		cadastroPanel.add(lblCategorias);
+ 		
+ 		JPanel listaPanel = new JPanel();
+ 		tabbedPane.addTab("Lista Produto", null, listaPanel, null);
+ 		listaPanel.setLayout(null);
+ 		
+ 		table = new JTable();
+ 		table.setModel(new DefaultTableModel(
+ 			new Object[][] {
+ 				{null, null, null},
+ 			},
+ 			new String[] {
+ 				"CÓDIGO", "NOME", "PREÇO"
+ 			}
+ 		));
+ 		table.setBounds(0, 0, 601, 336);
+ 		listaPanel.add(table);
+ 		
+ 		JPanel buscaPanel = new JPanel();
+ 		tabbedPane.addTab("Buscar Produto", null, buscaPanel, null);
+ 		buscaPanel.setLayout(null);
+ 		
+ 		JLabel lblCodigo = new JLabel("Código");
+ 		lblCodigo.setFont(new Font("Monospaced", Font.BOLD, 13));
+ 		lblCodigo.setBounds(0, 33, 55, 15);
+ 		buscaPanel.add(lblCodigo);
+ 		
+ 		codigoTF_buscar = new JTextField();
+ 		codigoTF_buscar.setBounds(51, 31, 104, 19);
+ 		buscaPanel.add(codigoTF_buscar);
+ 		codigoTF_buscar.setColumns(10);
+ 		
+ 		contatoTF_buscar = new JTextField();
+ 		contatoTF_buscar.setEditable(false);
+ 		contatoTF_buscar.setColumns(10);
+ 		contatoTF_buscar.setBounds(144, 275, 187, 20);
+ 		buscaPanel.add(contatoTF_buscar);
+ 		
+ 		JLabel lblContato_1 = new JLabel("Contato Distribuidora");
+ 		lblContato_1.setFont(new Font("Dialog", Font.PLAIN, 15));
+ 		lblContato_1.setBounds(0, 274, 149, 18);
+ 		buscaPanel.add(lblContato_1);
+ 		
+ 		JLabel lbLocalProduzido_1 = new JLabel("Local Produzido");
+ 		lbLocalProduzido_1.setFont(new Font("Dialog", Font.PLAIN, 15));
+ 		lbLocalProduzido_1.setBounds(0, 245, 120, 18);
+ 		buscaPanel.add(lbLocalProduzido_1);
+ 		
+ 		localTF_buscar = new JTextField();
+ 		localTF_buscar.setEditable(false);
+ 		localTF_buscar.setColumns(10);
+ 		localTF_buscar.setBounds(144, 241, 187, 20);
+ 		buscaPanel.add(localTF_buscar);
+ 		
+ 		categoriasTF_buscar = new JTextField();
+ 		categoriasTF_buscar.setEditable(false);
+ 		categoriasTF_buscar.setColumns(10);
+ 		categoriasTF_buscar.setBounds(144, 214, 447, 20);
+ 		buscaPanel.add(categoriasTF_buscar);
+ 		
+ 		JLabel lblCategorias_1 = new JLabel("Categorias");
+ 		lblCategorias_1.setFont(new Font("Dialog", Font.PLAIN, 15));
+ 		lblCategorias_1.setBounds(0, 218, 120, 18);
+ 		buscaPanel.add(lblCategorias_1);
+ 		
+ 		JLabel lblPreco_1 = new JLabel("preço");
+ 		lblPreco_1.setFont(new Font("Dialog", Font.PLAIN, 15));
+ 		lblPreco_1.setBounds(0, 183, 57, 18);
+ 		buscaPanel.add(lblPreco_1);
+ 		
+ 		precoTF_buscar = new JTextField();
+ 		precoTF_buscar.setEditable(false);
+ 		precoTF_buscar.setColumns(10);
+ 		precoTF_buscar.setBounds(47, 183, 86, 20);
+ 		buscaPanel.add(precoTF_buscar);
+ 		
+ 		JLabel lbNome_1 = new JLabel("nome");
+ 		lbNome_1.setFont(new Font("Dialog", Font.PLAIN, 15));
+ 		lbNome_1.setBounds(0, 151, 57, 18);
+ 		buscaPanel.add(lbNome_1);
+ 		
+ 		nomeTF_buscar = new JTextField();
+ 		nomeTF_buscar.setEditable(false);
+ 		nomeTF_buscar.setColumns(10);
+ 		nomeTF_buscar.setBounds(47, 151, 196, 20);
+ 		buscaPanel.add(nomeTF_buscar);
+ 		
+ 		JLabel lblfoto_1 = new JLabel("");
+ 		lblfoto_1.setBounds(441, 12, 150, 120);
+ 		buscaPanel.add(lblfoto_1);
+ 		
+ 		JButton btnProcurar = new JButton("Procurar");
+ 		btnProcurar.setBounds(10, 60, 98, 25);
+ 		buscaPanel.add(btnProcurar);
+ 		
+ 		btnProcurar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+				if(lista_produtos.get(codigoTF_buscar.getText())!=null) {
+					
+					nomeTF_buscar.setText(lista_produtos.get(codigoTF_buscar.getText()).getNome());
+					lblfoto_1.setIcon(lista_produtos.get(codigoTF_buscar.getText()).getIconProduto());
+				}
+				else JOptionPane.showMessageDialog(null,"CODIGO DE PRODUTO NÃO ECONTRADO");
+			}
+ 			
+ 		});
+ 		
+ 		JPanel panel_1 = new JPanel();
+ 		tabbedPane.addTab("Atualizar", null, panel_1, null);
+ 		
+ 		JPanel panel_2 = new JPanel();
+ 		tabbedPane.addTab("Deleta", null, panel_2, null);
  		
  		
 	}

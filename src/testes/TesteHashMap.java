@@ -37,6 +37,9 @@ public class TesteHashMap {
             System.out.println(chaves + " = " + nome + "	:["+categorias+"]" + "| CODIGO:"+codigo);
 		}
 		
+		if(listaProduto.get("F66")==null) {
+			System.out.println("FODASE");
+		}
 		//Lista do usuário (compra)
 		HashMap<String, CompraProduto> carrinho = new HashMap<String, CompraProduto>();
 		carrinho.put("F23", new CompraProduto(listaProduto.get("F40"),5));
