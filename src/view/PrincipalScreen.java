@@ -61,6 +61,7 @@ public class PrincipalScreen extends JFrame {
 	private JTable tableCompra;
 	private JTextField precoTF_compra;
 	private JTextField qtdaTF_compra;
+	private JTextField removerTF_compra;
 	
 	/**
 	 * Launch the application.
@@ -348,8 +349,8 @@ public class PrincipalScreen extends JFrame {
  		deletePanel.add(codigoTF_deleta);
  		codigoTF_deleta.setColumns(10);
  		
- 		JButton btnNewButton = new JButton("DELETAR");
- 		btnNewButton.addActionListener(new ActionListener() {
+ 		JButton btnDeletaProduto_deleta = new JButton("DELETAR");
+ 		btnDeletaProduto_deleta.addActionListener(new ActionListener() {
  			public void actionPerformed(ActionEvent e) {
  				
  				if(lista_produtos.get(codigoTF_deleta.getText())!=null) {
@@ -357,8 +358,7 @@ public class PrincipalScreen extends JFrame {
  					
  					
  					
- 					lista_produtos.remove(codigoTF_deleta.getText());
-	 				
+ 					
  					//table_Lista.removeAll();
  					DefaultTableModel modelo =(DefaultTableModel) table_Lista.getModel();
  					
@@ -375,9 +375,9 @@ public class PrincipalScreen extends JFrame {
  				}
  			}
  		});
- 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
- 		btnNewButton.setBounds(20, 48, 89, 34);
- 		deletePanel.add(btnNewButton);
+ 		btnDeletaProduto_deleta.setFont(new Font("Tahoma", Font.PLAIN, 12));
+ 		btnDeletaProduto_deleta.setBounds(20, 48, 89, 34);
+ 		deletePanel.add(btnDeletaProduto_deleta);
  		
  		JPanel listaCompraPanel = new JPanel();
  		tabbedPane.addTab("Compra", null, listaCompraPanel, null);
@@ -406,12 +406,13 @@ public class PrincipalScreen extends JFrame {
  		listaCompraPanel.add(tableCompra);
  		
  		
- 		JButton adicionarTF_compra = new JButton("Adicionar");
- 		adicionarTF_compra.addActionListener(new ActionListener() {
+ 		JButton bntAdicionar_produto = new JButton("Adicionar");
+ 		bntAdicionar_produto.addActionListener(new ActionListener() {
  			public void actionPerformed(ActionEvent e) {
  				
  				if(Validacao.IntTipo(qtdaTF_compra.getText()) && lista_produtos.get(codigoTF_Compra.getText())!=null) {
  					CompraProduto p = new CompraProduto(lista_produtos.get(codigoTF_Compra.getText()),Integer.parseInt(qtdaTF_compra.getText()));
+ 					p.setCodigo(String.valueOf(lista_compra.size()));
  					p.setPrecoTotal();
  					lista_compra.add(p);
  					DefaultTableModel modelo =(DefaultTableModel) tableCompra.getModel();
@@ -420,9 +421,9 @@ public class PrincipalScreen extends JFrame {
  				}
  			}
  		});
- 		adicionarTF_compra.setFont(new Font("Tahoma", Font.BOLD, 12));
- 		adicionarTF_compra.setBounds(449, 160, 102, 34);
- 		listaCompraPanel.add(adicionarTF_compra);
+ 		bntAdicionar_produto.setFont(new Font("Tahoma", Font.BOLD, 12));
+ 		bntAdicionar_produto.setBounds(449, 160, 102, 34);
+ 		listaCompraPanel.add(bntAdicionar_produto);
  		
 
  		JLabel lblNewLabel_1 = new JLabel("Preço");
@@ -445,6 +446,37 @@ public class PrincipalScreen extends JFrame {
  		qtdaTF_compra.setColumns(10);
  		qtdaTF_compra.setBounds(465, 90, 86, 20);
  		listaCompraPanel.add(qtdaTF_compra);
+ 		
+ 		removerTF_compra = new JTextField();
+ 		removerTF_compra.setColumns(10);
+ 		removerTF_compra.setBounds(82, 309, 86, 20);
+ 		listaCompraPanel.add(removerTF_compra);
+ 		
+ 		JLabel lblQtda_compra_1 = new JLabel("Código");
+ 		lblQtda_compra_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+ 		lblQtda_compra_1.setBounds(23, 306, 49, 22);
+ 		listaCompraPanel.add(lblQtda_compra_1);
+ 		
+ 		JButton bntRemover_compra = new JButton("Remover");
+ 		bntRemover_compra.addActionListener(new ActionListener() {
+ 			public void actionPerformed(ActionEvent e) {
+ 				if(Validacao.IntTipo(removerTF_compra.getText()) && lista_compra.size()>=Integer.parseInt(removerTF_compra.getText())){
+ 					lista_compra.remove(Integer.parseInt(removerTF_compra.getText()));
+ 					
+ 					DefaultTableModel modelo =(DefaultTableModel) tableCompra.getModel();
+ 					
+ 					modelo.setRowCount(0); //Limpar tabela
+ 					for(CompraProduto i:lista_compra) {
+ 						modelo.addRow(new Object[] {i.getProduto().getNome(),i.getQtda(),i.getPrecoTotal(),lista_compra.size()-1});
+ 					}
+ 					tableCompra.setModel(modelo);
+ 					
+ 				}
+ 			}
+ 		});
+ 		bntRemover_compra.setFont(new Font("Tahoma", Font.BOLD, 12));
+ 		bntRemover_compra.setBounds(178, 301, 102, 34);
+ 		listaCompraPanel.add(bntRemover_compra);
  		
 	}
 }
