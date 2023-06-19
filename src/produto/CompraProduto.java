@@ -84,7 +84,7 @@ public class CompraProduto{
 
 	/**Calcular o preco da comprar**/
 	public void setPrecoTotal() {
-		this.precoCompra = (this.produto.getPreco()*this.qtda);
+		if(this.produto!=null)this.precoCompra = (this.produto.getPreco()*this.qtda);
 		if(this.garantia!=null)this.precoCompra+=this.garantia.getPrecoGarantia();
 	}
 
