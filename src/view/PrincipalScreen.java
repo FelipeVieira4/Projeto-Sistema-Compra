@@ -8,8 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import produto.Produto;
-import produto.Validacao;
+import produto.*;
 
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
@@ -41,6 +40,8 @@ public class PrincipalScreen extends JFrame {
 	
 	private HashMap<String, Produto> lista_produtos = new HashMap<String, Produto>();
 	
+	private ArrayList<CompraProduto> lista_compra = new ArrayList<CompraProduto>();
+	
 	//Componentes Interface
 	private JTextField precoTF_cadastro;
 	private JTextField nomeTX_cadastro;
@@ -48,13 +49,18 @@ public class PrincipalScreen extends JFrame {
 	private JTextField localTextField;
 	private JTextField contatoTextField;
 	private JTextField categoriasTX_cadastro;
-	private JTable table;
+	private JTable table_Lista;
 	private JTextField codigoTF_buscar;
 	private JTextField contatoTF_buscar;
 	private JTextField localTF_buscar;
 	private JTextField categoriasTF_buscar;
 	private JTextField precoTF_buscar;
 	private JTextField nomeTF_buscar;
+	private JTextField codigoTF_deleta;
+	private JTextField codigoTF_Compra;
+	private JTable tableCompra;
+	private JTextField precoTF_compra;
+	private JTextField qtdaTF_compra;
 	
 	/**
 	 * Launch the application.
@@ -167,7 +173,7 @@ public class PrincipalScreen extends JFrame {
 				
 				if((precoTF_cadastro.getText().matches("[0-9.]*") && !precoTF_cadastro.getText().isBlank())
 					&& (Validacao.Codigo(codigoTF_cadastro.getText()) && !nomeTX_cadastro.getText().isBlank())) {
-					System.out.println("Sucesso");
+					
 					p.setPreco(Float.parseFloat(precoTF_cadastro.getText()));
 					p.setNome(nomeTX_cadastro.getText());
 					p.setCodigo(codigoTF_cadastro.getText());
@@ -188,10 +194,11 @@ public class PrincipalScreen extends JFrame {
 				if(lista_produtos.get(p.getCodigo())==null && validacaoProduto) {//verificar se não existe nenhum produto com esse código
 					
 						lista_produtos.put(p.getCodigo(),p);				
-											
-						DefaultTableModel modelo =(DefaultTableModel) table.getModel();
+						
+						
+						DefaultTableModel modelo =(DefaultTableModel) table_Lista.getModel();
 						modelo.addRow(new Object[] {p.getCodigo(),p.getNome(),p.getPreco()});
-						table.setModel(modelo);
+						table_Lista.setModel(modelo);
 				}
 			}
 		});
@@ -213,8 +220,8 @@ public class PrincipalScreen extends JFrame {
  		tabbedPane.addTab("Lista Produto", null, listaPanel, null);
  		listaPanel.setLayout(null);
  		
- 		table = new JTable();
- 		table.setModel(new DefaultTableModel(
+ 		table_Lista = new JTable();
+ 		table_Lista.setModel(new DefaultTableModel(
  			new Object[][] {
  				{null, null, null},
  			},
@@ -222,8 +229,8 @@ public class PrincipalScreen extends JFrame {
  				"CÓDIGO", "NOME", "PREÇO"
  			}
  		));
- 		table.setBounds(0, 0, 601, 336);
- 		listaPanel.add(table);
+ 		table_Lista.setBounds(0, 0, 601, 336);
+ 		listaPanel.add(table_Lista);
  		
  		JPanel buscaPanel = new JPanel();
  		tabbedPane.addTab("Buscar Produto", null, buscaPanel, null);
@@ -312,6 +319,12 @@ public class PrincipalScreen extends JFrame {
 					nomeTF_buscar.setText(lista_produtos.get(codigoTF_buscar.getText()).getNome());
 					lblfoto_buscar.setIcon(lista_produtos.get(codigoTF_buscar.getText()).getIconProduto());
 					precoTF_buscar.setText(String.valueOf(lista_produtos.get(codigoTF_buscar.getText()).getPreco()));
+					
+					localTF_buscar.setText(lista_produtos.get(codigoTF_buscar.getText()).getLocalProduzido());
+					contatoTF_buscar.setText(lista_produtos.get(codigoTF_buscar.getText()).getContatoDistribuidora());
+					
+					
+					
 				}
 				else JOptionPane.showMessageDialog(null,"CODIGO DE PRODUTO NÃO ECONTRADO");
 			}
@@ -321,9 +334,116 @@ public class PrincipalScreen extends JFrame {
  		JPanel panel_1 = new JPanel();
  		tabbedPane.addTab("Atualizar", null, panel_1, null);
  		
- 		JPanel panel_2 = new JPanel();
- 		tabbedPane.addTab("Deleta", null, panel_2, null);
+ 		JPanel deletePanel = new JPanel();
+ 		tabbedPane.addTab("Deleta", null, deletePanel, null);
+ 		deletePanel.setLayout(null);
  		
+ 		JLabel lblCodigo_deleta = new JLabel("Codigo Produto");
+ 		lblCodigo_deleta.setFont(new Font("Tahoma", Font.BOLD, 15));
+ 		lblCodigo_deleta.setBounds(10, 11, 126, 26);
+ 		deletePanel.add(lblCodigo_deleta);
+ 		
+ 		codigoTF_deleta = new JTextField();
+ 		codigoTF_deleta.setBounds(146, 16, 86, 20);
+ 		deletePanel.add(codigoTF_deleta);
+ 		codigoTF_deleta.setColumns(10);
+ 		
+ 		JButton btnNewButton = new JButton("DELETAR");
+ 		btnNewButton.addActionListener(new ActionListener() {
+ 			public void actionPerformed(ActionEvent e) {
+ 				
+ 				if(lista_produtos.get(codigoTF_deleta.getText())!=null) {
+ 					
+ 					
+ 					
+ 					
+ 					lista_produtos.remove(codigoTF_deleta.getText());
+	 				
+ 					//table_Lista.removeAll();
+ 					DefaultTableModel modelo =(DefaultTableModel) table_Lista.getModel();
+ 					
+ 					modelo.setRowCount(0);//limpa todas as colunas do modelo
+ 					
+ 					//loop adicionar lista_produto ao modelo
+	 				for (String chaves : lista_produtos.keySet()) {
+	 					modelo.addRow(new Object[] {lista_produtos.get(chaves).getCodigo(),lista_produtos.get(chaves).getNome(),lista_produtos.get(chaves).getPreco()});
+						
+	 		        }
+	 				table_Lista.setModel(modelo);
+
+	 				 				
+ 				}
+ 			}
+ 		});
+ 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+ 		btnNewButton.setBounds(20, 48, 89, 34);
+ 		deletePanel.add(btnNewButton);
+ 		
+ 		JPanel listaCompraPanel = new JPanel();
+ 		tabbedPane.addTab("Compra", null, listaCompraPanel, null);
+ 		listaCompraPanel.setLayout(null);
+ 		
+ 		JLabel lblNewLabel = new JLabel("Código");
+ 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+ 		lblNewLabel.setBounds(413, 37, 49, 22);
+ 		listaCompraPanel.add(lblNewLabel);
+ 		
+ 		codigoTF_Compra = new JTextField();
+ 		codigoTF_Compra.setBounds(465, 40, 86, 20);
+ 		listaCompraPanel.add(codigoTF_Compra);
+ 		codigoTF_Compra.setColumns(10);
+ 		
+ 		tableCompra = new JTable();
+ 		tableCompra.setModel(new DefaultTableModel(
+ 			new Object[][] {
+ 				{null, null, null},
+ 			},
+ 			new String[] {
+ 				"New column", "New column", "New column"
+ 			}
+ 		));
+ 		tableCompra.setBounds(10, 23, 393, 204);
+ 		listaCompraPanel.add(tableCompra);
+ 		
+ 		
+ 		JButton adicionarTF_compra = new JButton("Adicionar");
+ 		adicionarTF_compra.addActionListener(new ActionListener() {
+ 			public void actionPerformed(ActionEvent e) {
+ 				
+ 				if(Validacao.IntTipo(qtdaTF_compra.getText()) && lista_produtos.get(codigoTF_Compra.getText())!=null) {
+ 					CompraProduto p = new CompraProduto(lista_produtos.get(codigoTF_Compra.getText()),Integer.parseInt(qtdaTF_compra.getText()));
+ 					
+ 					lista_compra.add(p);
+ 					DefaultTableModel modelo =(DefaultTableModel) tableCompra.getModel();
+ 					modelo.addRow(new Object[] {p.getProduto().getNome(),p.getQtda(),lista_compra.size()-1});
+ 					tableCompra.setModel(modelo);
+ 				}
+ 			}
+ 		});
+ 		adicionarTF_compra.setFont(new Font("Tahoma", Font.BOLD, 12));
+ 		adicionarTF_compra.setBounds(449, 160, 102, 34);
+ 		listaCompraPanel.add(adicionarTF_compra);
+ 		
+
+ 		JLabel lblNewLabel_1 = new JLabel("Preço");
+ 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+ 		lblNewLabel_1.setBounds(413, 205, 49, 22);
+ 		listaCompraPanel.add(lblNewLabel_1);
+ 		
+ 		precoTF_compra = new JTextField();
+ 		precoTF_compra.setBounds(465, 207, 86, 20);
+ 		listaCompraPanel.add(precoTF_compra);
+ 		precoTF_compra.setColumns(10);
+ 		
+ 		JLabel lblQtda_compra = new JLabel("QTDA");
+ 		lblQtda_compra.setFont(new Font("Tahoma", Font.BOLD, 14));
+ 		lblQtda_compra.setBounds(413, 87, 49, 22);
+ 		listaCompraPanel.add(lblQtda_compra);
+ 		
+ 		qtdaTF_compra = new JTextField();
+ 		qtdaTF_compra.setColumns(10);
+ 		qtdaTF_compra.setBounds(465, 90, 86, 20);
+ 		listaCompraPanel.add(qtdaTF_compra);
  		
 	}
 }
