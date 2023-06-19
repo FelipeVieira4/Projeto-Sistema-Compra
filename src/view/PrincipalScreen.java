@@ -396,10 +396,10 @@ public class PrincipalScreen extends JFrame {
  		tableCompra = new JTable();
  		tableCompra.setModel(new DefaultTableModel(
  			new Object[][] {
- 				{null, null, null},
+ 				{null, null, null, null},
  			},
  			new String[] {
- 				"New column", "New column", "New column"
+ 				"New column", "New column", "New column", "New column"
  			}
  		));
  		tableCompra.setBounds(10, 23, 393, 204);
@@ -412,10 +412,10 @@ public class PrincipalScreen extends JFrame {
  				
  				if(Validacao.IntTipo(qtdaTF_compra.getText()) && lista_produtos.get(codigoTF_Compra.getText())!=null) {
  					CompraProduto p = new CompraProduto(lista_produtos.get(codigoTF_Compra.getText()),Integer.parseInt(qtdaTF_compra.getText()));
- 					
+ 					p.setPrecoTotal();
  					lista_compra.add(p);
  					DefaultTableModel modelo =(DefaultTableModel) tableCompra.getModel();
- 					modelo.addRow(new Object[] {p.getProduto().getNome(),p.getQtda(),lista_compra.size()-1});
+ 					modelo.addRow(new Object[] {p.getProduto().getNome(),p.getQtda(),p.getPrecoTotal(),lista_compra.size()-1});
  					tableCompra.setModel(modelo);
  				}
  			}
@@ -431,6 +431,7 @@ public class PrincipalScreen extends JFrame {
  		listaCompraPanel.add(lblNewLabel_1);
  		
  		precoTF_compra = new JTextField();
+ 		precoTF_compra.setEditable(false);
  		precoTF_compra.setBounds(465, 207, 86, 20);
  		listaCompraPanel.add(precoTF_compra);
  		precoTF_compra.setColumns(10);
