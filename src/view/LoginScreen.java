@@ -27,8 +27,8 @@ public class LoginScreen extends JFrame {
 	private JPasswordField password;
 	private JLabel lblNewLabel_1;
 
-	private String login= "user";
-	private String SenhaText = "senhaforte";
+	private String login= "Felps";
+	private String SenhaText = "senha";
 	
 	/**
 	 * Launch the application.
