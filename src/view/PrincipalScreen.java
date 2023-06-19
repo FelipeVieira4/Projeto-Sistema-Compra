@@ -25,6 +25,7 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -176,26 +177,22 @@ public class PrincipalScreen extends JFrame {
 				JFileChooser fileChooser = new JFileChooser();
 				fileChooser.showOpenDialog(getParent());
 				
-				
-				ImageIcon img= new ImageIcon(fileChooser.getSelectedFile().toString());//Carrega imagem
-				
-												//Escalona o img para tamanho do Jlabel lblfoto
-				p.setIcon(new ImageIcon((Image)img.getImage().getScaledInstance(lblfoto.getWidth(),lblfoto.getHeight(),Image.SCALE_SMOOTH)));
-				
-				lblfoto.setIcon(p.getIconProduto());
-				
-				
-				
-				if(lista_produtos.get(p.getCodigo())==null && validacaoProduto) {//verificar se não existe nenhum produto com esse código
-				
-					lista_produtos.put(p.getCodigo(),p);				
-										
-					DefaultTableModel modelo =(DefaultTableModel) table.getModel();
-					modelo.addRow(new Object[] {p.getCodigo(),p.getNome(),p.getPreco()});
-					table.setModel(modelo);
-					
+				File f = fileChooser.getSelectedFile();
+				if(f!=null) {
+					ImageIcon img= new ImageIcon(fileChooser.getSelectedFile().toString());//Carrega imagem
+					//Escalona o img para tamanho do Jlabel lblfoto
+						p.setIcon(new ImageIcon((Image)img.getImage().getScaledInstance(lblfoto.getWidth(),lblfoto.getHeight(),Image.SCALE_SMOOTH)));
+						lblfoto.setIcon(p.getIconProduto());
 				}
-			
+					
+				if(lista_produtos.get(p.getCodigo())==null && validacaoProduto) {//verificar se não existe nenhum produto com esse código
+					
+						lista_produtos.put(p.getCodigo(),p);				
+											
+						DefaultTableModel modelo =(DefaultTableModel) table.getModel();
+						modelo.addRow(new Object[] {p.getCodigo(),p.getNome(),p.getPreco()});
+						table.setModel(modelo);
+				}
 			}
 		});
 		runButton.setBounds(520, 303, 71, 32);
@@ -248,15 +245,15 @@ public class PrincipalScreen extends JFrame {
  		contatoTF_buscar.setBounds(144, 275, 187, 20);
  		buscaPanel.add(contatoTF_buscar);
  		
- 		JLabel lblContato_1 = new JLabel("Contato Distribuidora");
- 		lblContato_1.setFont(new Font("Dialog", Font.PLAIN, 15));
- 		lblContato_1.setBounds(0, 274, 149, 18);
- 		buscaPanel.add(lblContato_1);
+ 		JLabel lblContato_buscar = new JLabel("Contato Distribuidora");
+ 		lblContato_buscar.setFont(new Font("Dialog", Font.PLAIN, 15));
+ 		lblContato_buscar.setBounds(0, 274, 149, 18);
+ 		buscaPanel.add(lblContato_buscar);
  		
- 		JLabel lbLocalProduzido_1 = new JLabel("Local Produzido");
- 		lbLocalProduzido_1.setFont(new Font("Dialog", Font.PLAIN, 15));
- 		lbLocalProduzido_1.setBounds(0, 245, 120, 18);
- 		buscaPanel.add(lbLocalProduzido_1);
+ 		JLabel lbLocalProduzido_buscar = new JLabel("Local Produzido");
+ 		lbLocalProduzido_buscar.setFont(new Font("Dialog", Font.PLAIN, 15));
+ 		lbLocalProduzido_buscar.setBounds(0, 245, 120, 18);
+ 		buscaPanel.add(lbLocalProduzido_buscar);
  		
  		localTF_buscar = new JTextField();
  		localTF_buscar.setEditable(false);
@@ -270,15 +267,15 @@ public class PrincipalScreen extends JFrame {
  		categoriasTF_buscar.setBounds(144, 214, 447, 20);
  		buscaPanel.add(categoriasTF_buscar);
  		
- 		JLabel lblCategorias_1 = new JLabel("Categorias");
- 		lblCategorias_1.setFont(new Font("Dialog", Font.PLAIN, 15));
- 		lblCategorias_1.setBounds(0, 218, 120, 18);
- 		buscaPanel.add(lblCategorias_1);
+ 		JLabel lblCategorias_buscar = new JLabel("Categorias");
+ 		lblCategorias_buscar.setFont(new Font("Dialog", Font.PLAIN, 15));
+ 		lblCategorias_buscar.setBounds(0, 218, 120, 18);
+ 		buscaPanel.add(lblCategorias_buscar);
  		
- 		JLabel lblPreco_1 = new JLabel("preço");
- 		lblPreco_1.setFont(new Font("Dialog", Font.PLAIN, 15));
- 		lblPreco_1.setBounds(0, 183, 57, 18);
- 		buscaPanel.add(lblPreco_1);
+ 		JLabel lblPreco_buscar = new JLabel("preço");
+ 		lblPreco_buscar.setFont(new Font("Dialog", Font.PLAIN, 15));
+ 		lblPreco_buscar.setBounds(0, 183, 57, 18);
+ 		buscaPanel.add(lblPreco_buscar);
  		
  		precoTF_buscar = new JTextField();
  		precoTF_buscar.setEditable(false);
@@ -286,10 +283,10 @@ public class PrincipalScreen extends JFrame {
  		precoTF_buscar.setBounds(47, 183, 86, 20);
  		buscaPanel.add(precoTF_buscar);
  		
- 		JLabel lbNome_1 = new JLabel("nome");
- 		lbNome_1.setFont(new Font("Dialog", Font.PLAIN, 15));
- 		lbNome_1.setBounds(0, 151, 57, 18);
- 		buscaPanel.add(lbNome_1);
+ 		JLabel lbNome_buscar = new JLabel("nome");
+ 		lbNome_buscar.setFont(new Font("Dialog", Font.PLAIN, 15));
+ 		lbNome_buscar.setBounds(0, 151, 57, 18);
+ 		buscaPanel.add(lbNome_buscar);
  		
  		nomeTF_buscar = new JTextField();
  		nomeTF_buscar.setEditable(false);
@@ -297,15 +294,15 @@ public class PrincipalScreen extends JFrame {
  		nomeTF_buscar.setBounds(47, 151, 196, 20);
  		buscaPanel.add(nomeTF_buscar);
  		
- 		JLabel lblfoto_1 = new JLabel("");
- 		lblfoto_1.setBounds(441, 12, 150, 120);
- 		buscaPanel.add(lblfoto_1);
+ 		JLabel lblfoto_buscar = new JLabel("");
+ 		lblfoto_buscar.setBounds(441, 12, 150, 120);
+ 		buscaPanel.add(lblfoto_buscar);
  		
- 		JButton btnProcurar = new JButton("Procurar");
- 		btnProcurar.setBounds(10, 60, 98, 25);
- 		buscaPanel.add(btnProcurar);
+ 		JButton btnProcurar_buscar = new JButton("Procurar");
+ 		btnProcurar_buscar.setBounds(10, 60, 98, 25);
+ 		buscaPanel.add(btnProcurar_buscar);
  		
- 		btnProcurar.addActionListener(new ActionListener() {
+ 		btnProcurar_buscar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
@@ -313,7 +310,8 @@ public class PrincipalScreen extends JFrame {
 				if(lista_produtos.get(codigoTF_buscar.getText())!=null) {
 					
 					nomeTF_buscar.setText(lista_produtos.get(codigoTF_buscar.getText()).getNome());
-					lblfoto_1.setIcon(lista_produtos.get(codigoTF_buscar.getText()).getIconProduto());
+					lblfoto_buscar.setIcon(lista_produtos.get(codigoTF_buscar.getText()).getIconProduto());
+					precoTF_buscar.setText(String.valueOf(lista_produtos.get(codigoTF_buscar.getText()).getPreco()));
 				}
 				else JOptionPane.showMessageDialog(null,"CODIGO DE PRODUTO NÃO ECONTRADO");
 			}

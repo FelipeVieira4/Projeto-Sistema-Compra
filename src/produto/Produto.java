@@ -22,6 +22,7 @@ public class Produto {
 	private String localProduzido;			//Aonde o produto foi fabricado
 	
 	private ImageIcon iconProduto;
+	private String patchIcon; // Substituir o iconProduto
 	
 	private ArrayList<String> categorias=new ArrayList<String>();
 	
