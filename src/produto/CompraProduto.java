@@ -23,7 +23,6 @@ public class CompraProduto{
 		this.produto=pProduto;
 		
 		this.setQtda(pQtda);
-		this.setPrecoTotal();
 	}
 	
 	/**Metodo construtor com Garantia**/
