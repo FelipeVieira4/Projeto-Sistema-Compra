@@ -188,9 +188,9 @@ public class PrincipalScreen extends JFrame {
 					JFileChooser fileChooser = new JFileChooser();
 					fileChooser.showOpenDialog(getParent());
 					
-					File f = fileChooser.getSelectedFile();
-					if(f!=null) {
-						ImageIcon img= new ImageIcon(fileChooser.getSelectedFile().toString());//Carrega imagem
+					File file = fileChooser.getSelectedFile();
+					if(file!=null) {
+						ImageIcon img= new ImageIcon(file.toString());//Carrega imagem
 						//Escalona o img para tamanho do Jlabel lblfoto
 							p.setIcon(new ImageIcon((Image)img.getImage().getScaledInstance(lblfoto.getWidth(),lblfoto.getHeight(),Image.SCALE_SMOOTH)));
 							lblfoto.setIcon(p.getIconProduto());
@@ -425,6 +425,7 @@ public class PrincipalScreen extends JFrame {
  					p.setCodigo(String.valueOf(lista_compra.size()));
  					p.setPrecoTotal();
  					lista_compra.add(p);
+ 					
  					DefaultTableModel modelo =(DefaultTableModel) tableCompra.getModel();
  					modelo.addRow(new Object[] {p.getProduto().getNome(),p.getQtda(),p.getPrecoTotal(),lista_compra.size()-1});
  					tableCompra.setModel(modelo);
@@ -472,18 +473,18 @@ public class PrincipalScreen extends JFrame {
  			public void actionPerformed(ActionEvent e) {
  				
  							
- 				if(Validacao.IntTipo(removerTF_compra.getText()) && lista_compra.size()>Integer.parseInt(removerTF_compra.getText())){
+ 				if(Validacao.IntTipo(removerTF_compra.getText()) && lista_compra.size()>Integer.parseInt(removerTF_compra.getText()) && Integer.parseInt(removerTF_compra.getText())>=0){
  					lista_compra.remove(Integer.parseInt(removerTF_compra.getText()));
  					
  					DefaultTableModel modelo = (DefaultTableModel) tableCompra.getModel();
  					
  					modelo.setRowCount(0); //Limpar tabela
  					
- 					for(int i=lista_compra.size()-1;i>=0;i--) {
+ 					for(int i=0;i<lista_compra.size();i++) {
  						modelo.addRow(new Object[] {lista_compra.get(i).getProduto().getNome(),
  													lista_compra.get(i).getQtda(),
 					 								lista_compra.get(i).getPrecoTotal(),
-					 								(lista_compra.size()-1)-i
+					 								i
  												}
  						);
 
@@ -500,6 +501,22 @@ public class PrincipalScreen extends JFrame {
  		bntRemover_compra.setFont(new Font("Tahoma", Font.BOLD, 12));
  		bntRemover_compra.setBounds(178, 301, 102, 34);
  		listaCompraPanel.add(bntRemover_compra);
+ 		
+ 		JLabel lblNewLabel_2 = new JLabel("Código");
+ 		lblNewLabel_2.setBounds(324, 2, 49, 17);
+ 		listaCompraPanel.add(lblNewLabel_2);
+ 		
+ 		JLabel lblNewLabel_2_1 = new JLabel("Preço");
+ 		lblNewLabel_2_1.setBounds(240, 2, 40, 17);
+ 		listaCompraPanel.add(lblNewLabel_2_1);
+ 		
+ 		JLabel lblNewLabel_2_1_1 = new JLabel("Unidades");
+ 		lblNewLabel_2_1_1.setBounds(127, 2, 58, 17);
+ 		listaCompraPanel.add(lblNewLabel_2_1_1);
+ 		
+ 		JLabel lblNewLabel_2_1_1_1 = new JLabel("Nome");
+ 		lblNewLabel_2_1_1_1.setBounds(23, 2, 58, 17);
+ 		listaCompraPanel.add(lblNewLabel_2_1_1_1);
  		
 	}
 }
