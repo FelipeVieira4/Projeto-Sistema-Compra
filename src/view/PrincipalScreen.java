@@ -332,9 +332,6 @@ public class PrincipalScreen extends JFrame {
  			
  		});
  		
- 		JPanel panel_1 = new JPanel();
- 		tabbedPane.addTab("Atualizar", null, panel_1, null);
- 		
  		JPanel deletePanel = new JPanel();
  		tabbedPane.addTab("Deleta", null, deletePanel, null);
  		deletePanel.setLayout(null);
@@ -460,15 +457,28 @@ public class PrincipalScreen extends JFrame {
  		JButton bntRemover_compra = new JButton("Remover");
  		bntRemover_compra.addActionListener(new ActionListener() {
  			public void actionPerformed(ActionEvent e) {
- 				if(Validacao.IntTipo(removerTF_compra.getText()) && lista_compra.size()>=Integer.parseInt(removerTF_compra.getText())){
+ 				
+ 							
+ 				if(Validacao.IntTipo(removerTF_compra.getText()) && lista_compra.size()>Integer.parseInt(removerTF_compra.getText())){
  					lista_compra.remove(Integer.parseInt(removerTF_compra.getText()));
  					
- 					DefaultTableModel modelo =(DefaultTableModel) tableCompra.getModel();
+ 					DefaultTableModel modelo = (DefaultTableModel) tableCompra.getModel();
  					
  					modelo.setRowCount(0); //Limpar tabela
+ 					
+ 					for(int i=lista_compra.size()-1;i>=0;i--) {
+ 						modelo.addRow(new Object[] {lista_compra.get(i).getProduto().getNome(),
+ 													lista_compra.get(i).getQtda(),
+					 								lista_compra.get(i).getPrecoTotal(),
+					 								(lista_compra.size()-1)-i
+ 												}
+ 						);
+
+ 	 				}
+ 					/*
  					for(CompraProduto i:lista_compra) {
  						modelo.addRow(new Object[] {i.getProduto().getNome(),i.getQtda(),i.getPrecoTotal(),lista_compra.size()-1});
- 					}
+ 					}*/
  					tableCompra.setModel(modelo);
  					
  				}
