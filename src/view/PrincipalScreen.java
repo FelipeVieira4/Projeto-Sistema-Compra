@@ -179,6 +179,12 @@ public class PrincipalScreen extends JFrame {
 					p.setNome(nomeTX_cadastro.getText());
 					p.setCodigo(codigoTF_cadastro.getText());
 					
+					String[] s = categoriasTX_cadastro.getText().split(" ");
+					p.setCategorias(s);
+					
+					p.setContatoDistribuidora(codigoTF_cadastro.getText());
+					p.setLocalProduzido(localTextField.getText());
+					
 				} else validacaoProduto=false;
 				
 				JFileChooser fileChooser = new JFileChooser();
@@ -324,6 +330,11 @@ public class PrincipalScreen extends JFrame {
 					localTF_buscar.setText(lista_produtos.get(codigoTF_buscar.getText()).getLocalProduzido());
 					contatoTF_buscar.setText(lista_produtos.get(codigoTF_buscar.getText()).getContatoDistribuidora());
 					
+					categoriasTF_buscar.setText("[");
+					for(String i: lista_produtos.get(codigoTF_buscar.getText()).getCategoriasToArray()) {
+						categoriasTF_buscar.setText(categoriasTF_buscar.getText()+i+",");
+					}
+					categoriasTF_buscar.setText(categoriasTF_buscar.getText()+"]");
 					
 					
 				}
