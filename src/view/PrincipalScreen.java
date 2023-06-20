@@ -353,7 +353,7 @@ public class PrincipalScreen extends JFrame {
  				if(lista_produtos.get(codigoTF_deleta.getText())!=null) {
  					
  					
- 					
+ 					lista_produtos.remove(codigoTF_deleta.getText());
  					
  					
  					//table_Lista.removeAll();
