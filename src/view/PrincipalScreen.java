@@ -182,25 +182,27 @@ public class PrincipalScreen extends JFrame {
 					String[] s = categoriasTX_cadastro.getText().split(" ");
 					p.setCategorias(s);
 					
-					p.setContatoDistribuidora(codigoTF_cadastro.getText());
+					p.setContatoDistribuidora(contatoTextField.getText());
 					p.setLocalProduzido(localTextField.getText());
+					
+					JFileChooser fileChooser = new JFileChooser();
+					fileChooser.showOpenDialog(getParent());
+					
+					File f = fileChooser.getSelectedFile();
+					if(f!=null) {
+						ImageIcon img= new ImageIcon(fileChooser.getSelectedFile().toString());//Carrega imagem
+						//Escalona o img para tamanho do Jlabel lblfoto
+							p.setIcon(new ImageIcon((Image)img.getImage().getScaledInstance(lblfoto.getWidth(),lblfoto.getHeight(),Image.SCALE_SMOOTH)));
+							lblfoto.setIcon(p.getIconProduto());
+					}
 					
 				} else validacaoProduto=false;
 				
-				JFileChooser fileChooser = new JFileChooser();
-				fileChooser.showOpenDialog(getParent());
 				
-				File f = fileChooser.getSelectedFile();
-				if(f!=null) {
-					ImageIcon img= new ImageIcon(fileChooser.getSelectedFile().toString());//Carrega imagem
-					//Escalona o img para tamanho do Jlabel lblfoto
-						p.setIcon(new ImageIcon((Image)img.getImage().getScaledInstance(lblfoto.getWidth(),lblfoto.getHeight(),Image.SCALE_SMOOTH)));
-						lblfoto.setIcon(p.getIconProduto());
-				}
 					
 				if(lista_produtos.get(p.getCodigo())==null && validacaoProduto) {//verificar se não existe nenhum produto com esse código
 					
-						lista_produtos.put(p.getCodigo(),p);				
+						lista_produtos.put(p.getCodigo(),p);			
 						
 						
 						DefaultTableModel modelo =(DefaultTableModel) table_Lista.getModel();
