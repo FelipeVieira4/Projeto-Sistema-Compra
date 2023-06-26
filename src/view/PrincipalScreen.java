@@ -19,15 +19,21 @@ import java.awt.Image;
 
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
+import javax.sql.ConnectionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import dados.ConexaoMySQL;
+import dados.GrubDados;
 
 public class PrincipalScreen extends JFrame {
 
@@ -209,6 +215,9 @@ public class PrincipalScreen extends JFrame {
 						modelo.addRow(new Object[] {p.getCodigo(),p.getNome(),p.getPreco()});
 						table_Lista.setModel(modelo);
 				}
+				
+				GrubDados.salvarProduto(p);
+				
 			}
 		});
 		runButton.setBounds(520, 303, 71, 32);
@@ -489,10 +498,6 @@ public class PrincipalScreen extends JFrame {
  						);
 
  	 				}
- 					/*
- 					for(CompraProduto i:lista_compra) {
- 						modelo.addRow(new Object[] {i.getProduto().getNome(),i.getQtda(),i.getPrecoTotal(),lista_compra.size()-1});
- 					}*/
  					tableCompra.setModel(modelo);
  					
  				}
